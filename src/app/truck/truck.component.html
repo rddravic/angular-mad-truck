@@ -1,0 +1,19 @@
+<div class="container mt-3 table-responsive">
+  <table class="table" *ngIf="trucks">
+    <tbody>
+      <tr *ngFor="let t of trucks">
+        <td class="bet">
+          <span *ngIf="t.bet > 0" [style.color]="t?.color">${{ t.bet }}</span>
+        </td>
+        <td>
+          <h2 class="text-end track" [style.width]="t?.val + '%'">
+            <i [style.color]="t?.color" class="fas fa-truck"></i>
+          </h2>
+        </td>
+        <td class="won">
+          <i *ngIf="t?.won" class="fas fa-flag-checkered"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

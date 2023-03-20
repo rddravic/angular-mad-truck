@@ -1,0 +1,24 @@
+<div *ngIf="trucks">
+  <form [formGroup]="betForm">
+    <div
+      formArrayName="items"
+      *ngFor="let item of betForm.get('items')['controls']; let i = index"
+    >
+      <div [formGroupName]="i">
+        <div class="input-group mb-3">
+          <label class="col-sm-6 col-form-label">
+            <i [style.color]="item?.value.label" class="fas fa-truck"></i>
+            Trucker {{ i + 1 }} ({{ item.value.label }})
+          </label>
+          <span class="input-group-text">$</span>
+          <input
+            formControlName="bet"
+            placeholder="Add Amount"
+            class="form-control"
+            (keyup)="setBet(item)"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

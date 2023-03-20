@@ -1,0 +1,101 @@
+<div class="container p-5 my-5 border">
+  <div class="row">
+    <div class="col text-center">
+      <h1>{{ title }} <i class="fas fa-truck"></i></h1>
+    </div>
+    <div class="col text-end lead">
+      <div>
+        <i class="fas fa-user"></i>
+        {{ player['name'] }}
+      </div>
+      <div>${{ fund }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- <h2 class="text-center text-danger" *ngIf="wonAmount">
+      *** Congrats, You Won ${{ wonAmount }} ! ***
+    </h2>
+    <h2 class="text-center" *ngIf="setup">Game Setup</h2>
+    <h2 class="text-center text-danger" *ngIf="lowFund">Please add Fuds !!</h2> -->
+  </div>
+  <div class="row">
+    <!-- <ng-container *ngIf="game && TRUCKS.length > 0">
+      <truck [trucks]="TRUCKS"></truck>
+    </ng-container>
+    <ng-container *ngIf="setup">
+      <app-setup></app-setup>
+    </ng-container> -->
+    <ng-container>
+      <router-outlet></router-outlet>
+    </ng-container>
+  </div>
+  <div class="row">
+    <ng-container *ngIf="game">
+      <div class="actions">
+        <button class="btn btn-secondary" (click)="placeBet(content)">
+          Place Bet
+          <i class="far fa-money-bill-alt"></i>
+        </button>
+        <button
+          *ngIf="raceStarted"
+          class="btn btn-secondary"
+          (click)="startRace()"
+          [disabled]="raceStarted || !betplaced"
+        >
+          Start Race
+          <i class="spinner-grow spinner-grow-sm"></i>
+        </button>
+        <button
+          *ngIf="!raceStarted"
+          class="btn btn-secondary"
+          (click)="startRace()"
+          [disabled]="raceStarted || !betplaced"
+        >
+          Start Race
+          <i class="fas fa-flag-checkered"></i>
+        </button>
+        <button class="btn btn-outline-dark" (click)="reset()">
+          Reset
+          <i class="fas fa-undo"></i>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row"></div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Place Bet!</h4>
+    <button
+      type="button"
+      class="close btn btn-outline-dark"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-place-bet
+      [trucks]="TRUCKS"
+      (setBets)="setBets($event)"
+    ></app-place-bet>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="c('Save click'); betPlaced()"
+    >
+      Bet
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="d('Cross click')"
+    >
+      Cancel
+    </button>
+  </div>
+</ng-template>
